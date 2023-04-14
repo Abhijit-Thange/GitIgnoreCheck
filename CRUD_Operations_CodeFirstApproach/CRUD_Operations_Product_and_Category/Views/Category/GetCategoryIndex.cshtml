@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CRUD_Operations_Product_and_Category.Models.Category>
+
+@{
+    ViewBag.Title = "Category Index";
+}
+
+<h2>Category List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateCategory")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryName)
+        </td>
+        <td>
+            @Html.ActionLink("Active | ", "ActivateCategory", new { id = item.CategoryId }) 
+            @Html.ActionLink("Deactive ", "DeactivateCategory", new { id = item.CategoryId })
+        </td>
+        <td>
+            @if (item.IsActive == true) { 
+            <a href="@Url.Action("AddProduct","Products",new {id=item.CategoryId})">AddProduct | </a> 
+            @Html.ActionLink("Edit | ", "EditCategory", new { id = item.CategoryId }) 
+            @Html.ActionLink("Details | ", "CategoryDetails", new { id = item.CategoryId }) 
+            @Html.ActionLink("Delete", "DeleteCategory", new { id = item.CategoryId })
+          }
+        </td>
+    </tr>
+}
+
+</table>
